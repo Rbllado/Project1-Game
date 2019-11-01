@@ -1,0 +1,73 @@
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+ body {
+  font: 200 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+
+.container {
+  
+  top: 0;
+  background-image: url("../images/prueba.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  /* with position abslute */
+  display: flex;
+  justify-content: center; 
+  
+}
+.title{
+    top: 0;
+    text-align: center;
+    margin-top: 30;
+    /* Con postion absolute */
+    position: absolute;
+    color: red;
+    font-size: 40px;
+    
+    
+
+}
+
+.player-class {
+    width: auto;
+    height: 800px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 40px;
+}
+
+div{
+    height: 200px;
+    width: 200px;
+    background: white;
+    /* con display flex  */
+    margin: 30px; 
+    
+}
+
+
+button{
+    height: 20px;
+    width: 60px;
+    /* border: 1px solid black; */
+}
+
+.players{
+    background-color: gainsboro;
+}
+.players img{
+    height: 100px;
+    width: 200px;   
+}
