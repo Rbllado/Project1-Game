@@ -15,9 +15,13 @@ Player.prototype.setDirection = function(direction) {
   // +1 down  -1 up
   if (direction === 'up') this.direction = -1;
   else if (direction === 'down') this.direction = 1;
+
+//   Añadir derecha y izquierda. Y espacio para disparar.
 };
 
 Player.prototype.didCollide = function(enemy) {
+    //check the collision with the computerPlayer
+
   var playerLeft = this.x;
   var playerRight = this.x + this.size;
   var playerTop = this.y;
@@ -57,3 +61,9 @@ Player.prototype.draw = function() {
   // fillRect(x, y, width, height)
   this.ctx.fillRect(this.x, this.y, this.size, this.size);
 };
+
+
+Player.prototype.bullet = function(){};
+
+// Maybe to change 180 degrees the player.
+Player.prototype.inverse = function(){};

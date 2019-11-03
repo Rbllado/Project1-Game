@@ -3,7 +3,8 @@
 function Game() {
   this.canvas = null;
   this.ctx = null;
-  this.enemies = [];
+  // this.enemies = [];
+  this.ComputerPlaer = null;
   this.player = null;
   this.gameIsOver = false;
   this.gameScreen = null;
@@ -11,6 +12,8 @@ function Game() {
 }
 
 // Append canvas to the DOM, create a Player and start the Canvas loop
+
+
 Game.prototype.start = function() {
   // Save reference to canvas and its container. Create ctx
   this.canvasContainer = document.querySelector('.canvas-container');
@@ -18,12 +21,14 @@ Game.prototype.start = function() {
   this.ctx = this.canvas.getContext('2d');
 
   // Save reference to the score and lives elements
+
   this.livesElement = this.gameScreen.querySelector('.lives .value');
   this.scoreElement = this.gameScreen.querySelector('.score .value');
 
   // Set the canvas dimensions to match the parent `.canvas-container`
-  this.containerWidth = this.canvasContainer.offsetWidth;
-  this.containerHeight = this.canvasContainer.offsetHeight;
+
+  this.containerWidth = this.canvasContainer.offsetWidth/2;
+  this.containerHeight = this.canvasContainer.offsetHeight/2;
   this.canvas.setAttribute('width', this.containerWidth);
   this.canvas.setAttribute('height', this.containerHeight);
 
@@ -51,21 +56,27 @@ Game.prototype.start = function() {
 
 Game.prototype.startLoop = function() {
   var loop = function() {
-    // 1. UPDATE THE STATE OF PLAYER AND ENEMIES
+    // 1. UPDATE THE STATE OF PLAYER AND computerplayer
 
     // 0. Our player was already created - via `game.start()`
 
-    // 1. Create new enemies randomly
-    if (Math.random() > 0.98) {
-      var randomY = this.canvas.height * Math.random();
-      this.enemies.push(new Enemy(this.canvas, randomY, 5));
-    }
+    //
+    //1. I have to create a computer player in a random CaretPosition.
 
-    // 2. Check if player had hit any enemy (check all enemies)
+    // if (Math.random() > 0.98) {
+    //   var randomY = this.canvas.height * Math.random();
+    //   this.enemies.push(new Enemy(this.canvas, randomY, 5));
+    // }
+
+
+
+    // 2. Check if player had hit any enemy (check with enemy)
     this.checkCollisions();
 
-    // 3. Check if player is going off the screen
+    // 3. Check if players is going off the screen
+    //Check also for computer player
     this.player.handleScreenCollision();
+  
 
     // 4. Move existing enemies
     // 5. Check if any enemy is going of the screen

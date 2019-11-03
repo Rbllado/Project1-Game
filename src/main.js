@@ -51,15 +51,43 @@ function main() {
 
   function createSplashScreen() {
     splashScreen = buildDom(`
-    <main>
-      <h1>Eternal Enemies</h1>
-      <button>Start</button>
+
+    <main class="container">
+        <section class="title">
+            <h2>Project Game</h2>
+        </section>
+        <section class="player-class">
+            <div class="players" id="player1">
+                <img src="./images/brucelee.jpg" alt="Image Player"></img>
+                <h4>Bruce</h4>
+                <button id="btn-player1">Select</button>
+            </div>
+
+            <!-- <div class="players">
+                <img src="" alt="Image Player"></img>
+                <h4>Name</h4>
+                <button id="btn-player2">Select</button>
+            </div>
+
+            <div class="players">
+                <img src="" alt="Image Player"></img>
+                <h4>Name</h4>
+                <button id="btn-player3">Select</button>
+            </div>
+
+            <div class="players">
+                <img src="" alt="Image Player"></img>
+                <h4>Name</h4>
+                <button id="btn-player4">Select</button>
+            </div> -->
+
+        </section>
     </main>
   `);
 
     document.body.appendChild(splashScreen);
 
-    var startButton = splashScreen.querySelector('button');
+    var startButton = splashScreen.querySelector('#btn-player1');
     startButton.addEventListener('click', function() {
       startGame();
     });
@@ -68,6 +96,8 @@ function main() {
   function removeSplashScreen() {
     splashScreen.remove();
   }
+
+
 
   // -- game screen
 
@@ -123,6 +153,8 @@ function main() {
       gameOverScreen.remove();
     }
   }
+
+
 
   // -- Setting the game state
 
