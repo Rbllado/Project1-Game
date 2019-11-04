@@ -163,3 +163,29 @@ html {
     flex: 1;
     background-color: black;
   }
+
+  .game-over {
+  
+    top: 0;
+    background-image: url("../images/gameOver.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    /* with position abslute */
+    /* display: flex; */
+    justify-content: center; 
+
+    width: auto;
+    height: 800px;
+    text-align: center;
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 40px;
+    
+  }
+
+  .title-over{
+    color: white;
+    border-color: red;
+  }

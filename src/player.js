@@ -12,16 +12,13 @@ function Player(canvas, lives) {
 }
 
 Player.prototype.setDirection = function(direction) {
-  // Right + 1, left -1
   //The direction x is call in handleScreenCollision
   if (direction === "left") this.direction = -1;
   else if (direction === "right") this.direction = 1;
-
-  //   Añadir derecha y izquierda. Y espacio para disparar.
 };
 
 Player.prototype.didCollide = function(enemy) {
-  //check the collision with the computerPlayer
+  //check the collision with the enemy
 
   var playerLeft = this.x;
   var playerRight = this.x + this.size;
@@ -44,12 +41,9 @@ Player.prototype.didCollide = function(enemy) {
   return false;
 };
 
+// check collision left and right with the wall
 Player.prototype.handleScreenCollision = function() {
   this.x = this.x + this.direction * this.speed;
-  // this.y = this.y + this.direction * this.speed;
-  // var screenLeft = this.canvas.width;
-
-  // It is working to right and left.
   var screenRight = this.canvas.width - this.size;
 
   if (this.x > screenRight) this.direction = -1;
@@ -65,5 +59,3 @@ Player.prototype.draw = function() {
   // fillRect(x, y, width, height)
   this.ctx.fillRect(this.x, this.y, this.size, this.size);
 };
-
-Player.prototype.bullet = function() {};
