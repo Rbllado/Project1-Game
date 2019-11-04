@@ -2,8 +2,8 @@ function Bullet(canvas, playerX, playerY, speed) {
   this.canvas = canvas;
   this.ctx = canvas.getContext("2d");
   this.x = playerX;
-  this.size = 5;
   this.y = playerY;
+  this.size = 10;
   this.speed = speed;
 }
 
@@ -28,4 +28,28 @@ Bullet.prototype.updatePosition = function() {
 
 Bullet.prototype.isInsideScreen = function() {
   return this.y - this.size / 2 < this.canvas.height;
+};
+
+Bullet.prototype.didCollide = function(enemy) {
+  //check the collision with the computerPlayer
+
+  var playerLeft = this.x;
+  var playerRight = this.x + this.size;
+  var playerTop = this.y;
+  var playerBottom = this.y + this.size;
+
+  var enemyLeft = enemy.x;
+  var enemyRight = enemy.x + enemy.size;
+  var enemyTop = enemy.y;
+  var enemyBottom = enemy.y + enemy.size;
+
+  var crossRight = enemyLeft <= playerRight && enemyLeft >= playerLeft;
+  var crossLeft = enemyRight >= playerLeft && enemyRight <= playerRight;
+  var crossTop = enemyBottom >= playerTop && enemyBottom <= playerBottom;
+  var crossBottom = enemyTop <= playerBottom && enemyTop >= playerTop;
+
+  if ((crossRight || crossLeft) && (crossBottom || crossTop)) {
+    return true;
+  }
+  return false;
 };

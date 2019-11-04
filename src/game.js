@@ -6,7 +6,7 @@ function Game() {
   this.enemies = [];
   this.bullets = [];
 
-  // this.bulletPlayer = []; //Filter to remove if is not into the canvas
+  this.bulletsRubish = []; //Filter to remove if is not into the canvas
 
   this.player = null;
   this.gameIsOver = false;
@@ -27,7 +27,7 @@ Game.prototype.start = function() {
   // Save reference to the score and lives elements
 
   this.livesElement = this.gameScreen.querySelector(".lives .value");
-  this.scoreElement = this.gameScreen.querySelector('.score .value');
+  this.scoreElement = this.gameScreen.querySelector(".score .value");
 
   // Set the canvas dimensions to match the parent `.canvas-container`
 
@@ -35,8 +35,6 @@ Game.prototype.start = function() {
   this.containerHeight = this.canvasContainer.offsetHeight;
   this.canvas.setAttribute("width", this.containerWidth);
   this.canvas.setAttribute("height", this.containerHeight);
-
-
 
   // Create a new player for the current game
   this.player = new Player(this.canvas, 3);
@@ -47,7 +45,7 @@ Game.prototype.start = function() {
       this.player.setDirection("left");
     } else if (event.key === "ArrowRight") {
       this.player.setDirection("right");
-    } else if(event.which === 32){
+    } else if (event.which === 32) {
       // console.log("heyy");
       this.bullet();
     }
@@ -61,93 +59,69 @@ Game.prototype.start = function() {
 
   // Start the canvas requestAnimationFrame loop
   this.startLoop();
-
 };
 
-
 // Function to create a bullets
-Game.prototype.bullet = function(){
+Game.prototype.bullet = function() {
   console.log("Bullet");
-  var newBullet = new Bullet(this.canvas, this.player.x + this.player.size / 2, this.player.y,  3);
+  var newBullet = new Bullet(
+    this.canvas,
+    this.player.x + this.player.size / 2,
+    this.player.y,
+    3
+  );
   this.bullets.push(newBullet);
-}
-
-
+};
 
 Game.prototype.startLoop = function() {
   var loop = function() {
-    // 1. UPDATE THE STATE OF PLAYER AND computerplayer
-
-    // 0. Our player was already created - via `game.start()`
-
-    //
-    //1. I have to create a computer player in a random CaretPosition.
-
-    // It will be into random X site of screen
-    
+    // 1. UPDATE THE STATE OF PLAYER
+    // We create random enemies into the game
     if (Math.random() > 0.991) {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 4);
       this.enemies.push(newEnemy);
     }
 
-    // 2. Check if player had hit any enemy (check with enemy)
+    // 2. Check if player had hit any enemy (check with enemy) // Check if bullet is collision with enemies
     this.checkCollisions();
+    this.checkCollisionBullet();
 
     // 3. Check if players is going off the screen
-    //Check also for computer player
 
     this.player.handleScreenCollision();
 
-    // 4. Move existing enemies
-    // 5. Check if any enemy is going of the screen
+    // 4. Move existing enemies and bullets //5. Check if any enemy is going of the screen
 
     this.enemies = this.enemies.filter(function(enemy) {
       enemy.updatePosition();
       return enemy.isInsideScreen();
     });
 
-
-    //move bullets direction
-    this.bullets = this.bullets.filter(function(tiro){
+    this.bullets = this.bullets.filter(function(tiro) {
       tiro.updatePosition();
       return tiro.isInsideScreen();
     });
 
-
-
-
-
     // 2. CLEAR THE CANVAS
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-
-
-
-
     // 3. UPDATE THE CANVAS
-    // Draw the player
+    // Draw the player // Draw the enemies // Draw Bullet
     this.player.draw();
 
-    // Draw the enemies
     this.enemies.forEach(function(item) {
       item.draw();
     });
 
-    // Draw Bullet
     this.bullets.forEach(function(bull) {
       bull.draw();
     });
-
-
-
-
 
     // 4. TERMINATE LOOP IF GAME IS OVER
     if (!this.gameIsOver) {
       window.requestAnimationFrame(loop);
     }
-
     //  5. Update Game data/stats
     this.updateGameStats();
   }.bind(this);
@@ -161,16 +135,14 @@ Game.prototype.startLoop = function() {
   window.requestAnimationFrame(loop);
 };
 
-// 
+//
 
 Game.prototype.checkCollisions = function() {
   this.enemies.forEach(function(enemy) {
-    if (this.player.didCollide(enemy) || enemy.outScreen() ) {
+    if (this.player.didCollide(enemy) || enemy.outScreen()) {
       this.player.removeLife();
-      
       // Move the enemy off screen to the left
       enemy.y = this.canvas.height + enemy.size;
-
       if (this.player.lives === 0) {
         this.gameOver();
       }
@@ -178,6 +150,18 @@ Game.prototype.checkCollisions = function() {
   }, this);
 };
 
+// This one is checking if the bullet hits an enemy
+Game.prototype.checkCollisionBullet = function() {
+  this.bullets.forEach(function(bull) {
+    this.enemies.forEach(function(enemy) {
+      if (bull.didCollide(enemy)) {
+        // Move the enemy and the bullet off screen to the left
+        enemy.y = this.canvas.height + enemy.size;
+        bull.y = this.canvas.height + enemy.size;
+      }
+    }, this);
+  }, this);
+};
 
 Game.prototype.updateGameStats = function() {
   this.score += 1;
@@ -188,7 +172,7 @@ Game.prototype.updateGameStats = function() {
 Game.prototype.gameOver = function() {
   // flag `gameIsOver = true` stops the loop
   this.gameIsOver = true;
-  
+
   // Call the gameOver function from `main` to show the Game Over Screen
   this.onGameOverCallback();
 };
@@ -197,14 +181,9 @@ Game.prototype.removeGameScreen = function() {
   this.gameScreen.remove();
 };
 
-
 Game.prototype.passGameOverCallback = function(callback) {
   this.onGameOverCallback = callback;
 };
-
-
-
-
 
 // This game is from Ghost.
 
