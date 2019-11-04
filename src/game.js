@@ -39,13 +39,12 @@ Game.prototype.start = function() {
   // Create a new player for the current game
   this.player = new Player(this.canvas, 3);
 
-  // Add event listener for moving the player
-  // I need to move that to left and right arrow
+  //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
-    if (event.key === "ArrowUp") {
-      this.player.setDirection("up");
-    } else if (event.key === "ArrowDown") {
-      this.player.setDirection("down");
+    if (event.key === "ArrowLeft") {
+      this.player.setDirection("left");
+    } else if (event.key === "ArrowRight") {
+      this.player.setDirection("right");
     }
   };
 
@@ -72,8 +71,8 @@ Game.prototype.startLoop = function() {
     // It will be into random X site of screen
     
     if (Math.random() > 0.98) {
-      var randomY = this.canvas.height * Math.random();
-      var newEnemy = new Enemy(this.canvas, randomY, 5);
+      var randomX = this.canvas.height * Math.random();
+      var newEnemy = new Enemy(this.canvas, randomX, 5);
       this.enemies.push(newEnemy);
     }
 

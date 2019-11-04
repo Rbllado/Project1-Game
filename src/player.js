@@ -1,26 +1,27 @@
-'use strict';
+"use strict";
 
 function Player(canvas, lives) {
   this.canvas = canvas;
-  this.ctx = this.canvas.getContext('2d');
+  this.ctx = this.canvas.getContext("2d");
   this.lives = lives;
-  this.size = 100;
-  this.x = 50;
-  this.y = canvas.height / 2;
+  this.size = 50;
+  this.x = canvas.width / 2;
+  this.y = canvas.height - 50;
   this.direction = 0;
   this.speed = 5;
 }
 
 Player.prototype.setDirection = function(direction) {
-  // +1 down  -1 up
-  if (direction === 'up') this.direction = -1;
-  else if (direction === 'down') this.direction = 1;
+  // Right + 1, left -1
+  //The direction x is call in handleScreenCollision
+  if (direction === "left") this.direction = -1;
+  else if (direction === "right") this.direction = 1;
 
-//   Añadir derecha y izquierda. Y espacio para disparar.
+  //   Añadir derecha y izquierda. Y espacio para disparar.
 };
 
 Player.prototype.didCollide = function(enemy) {
-    //check the collision with the computerPlayer
+  //check the collision with the computerPlayer
 
   var playerLeft = this.x;
   var playerRight = this.x + this.size;
@@ -44,12 +45,15 @@ Player.prototype.didCollide = function(enemy) {
 };
 
 Player.prototype.handleScreenCollision = function() {
-  this.y = this.y + this.direction * this.speed;
-  var screenTop = 0;
-  var screenBottom = this.canvas.height;
+  this.x = this.x + this.direction * this.speed;
+  // this.y = this.y + this.direction * this.speed;
+  // var screenLeft = this.canvas.width;
 
-  if (this.y > screenBottom) this.direction = -1;
-  else if (this.y < screenTop) this.direction = 1;
+  // It is working to right and left.
+  var screenRight = this.canvas.width - this.size;
+
+  if (this.x > screenRight) this.direction = -1;
+  else if (this.x < screenLeft) this.direction = 1;
 };
 
 Player.prototype.removeLife = function() {
@@ -57,10 +61,9 @@ Player.prototype.removeLife = function() {
 };
 
 Player.prototype.draw = function() {
-  this.ctx.fillStyle = '#66D3FA';
+  this.ctx.fillStyle = "#66D3FA";
   // fillRect(x, y, width, height)
   this.ctx.fillRect(this.x, this.y, this.size, this.size);
 };
 
-
-Player.prototype.bullet = function(){};
+Player.prototype.bullet = function() {};
