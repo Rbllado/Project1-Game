@@ -72,9 +72,9 @@ Game.prototype.startLoop = function() {
 
     // It will be into random X site of screen
     
-    if (Math.random() > 0.98) {
+    if (Math.random() > 0.991) {
       var randomX = this.canvas.height * Math.random();
-      var newEnemy = new Enemy(this.canvas, randomX, 5);
+      var newEnemy = new Enemy(this.canvas, randomX, 4);
       this.enemies.push(newEnemy);
     }
 
@@ -129,17 +129,17 @@ Game.prototype.startLoop = function() {
   window.requestAnimationFrame(loop);
 };
 
-
+// 
 
 Game.prototype.checkCollisions = function() {
   this.enemies.forEach(function(enemy) {
-    if (this.player.didCollide(enemy) || enemy.outScreen()) {
+    if (this.player.didCollide(enemy) || enemy.outScreen() ) {
       console.log("heyy",enemy.outScreen());
       
-      
       this.player.removeLife();
+      
       // Move the enemy off screen to the left
-      enemy.x = 0 - enemy.size;
+      enemy.y = this.canvas.height + enemy.size;
 
       if (this.player.lives === 0) {
         this.gameOver();

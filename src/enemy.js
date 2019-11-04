@@ -24,14 +24,7 @@ Enemy.prototype.updatePosition = function() {
 Enemy.prototype.isInsideScreen = function() {
   
   //It is not working well, start to say out in the first one outside  but if I type result to return it is not working.
-
-  // var result = this.y - this.size/2 > this.canvas.height;
-  // if(result){
-  //   console.log("out");
-  // }
-  // if(!(this.y - this.size / 2 < this.canvas.height)){
-    
-  // }
+  console.log("I am in");
   
   return this.y - this.size / 2 < this.canvas.height;
 };
@@ -39,18 +32,17 @@ Enemy.prototype.isInsideScreen = function() {
 
 
 // Enemy.prototype.outScreen = function(){
-//   if(!(this.y - this.size / 2 < this.canvas.height)){ 
-//     console.log("out");
+//   if((this.y - this.size / 2 > this.canvas.height)){ 
 //     return true;
 //   }else{
+//     console.log((this.y - this.size / 2),this.canvas.height);    
 //     return false;
 //   }
 // }
 
 Enemy.prototype.outScreen = function(){
-  console.log("hola..");
-    return !(this.y - this.size / 2 < this.canvas.height);
-    
-    }
+  console.log("hola..", this.y - this.size / 2),this.canvas.height;
+    return (this.y  > this.canvas.height);
+  }
   
   
