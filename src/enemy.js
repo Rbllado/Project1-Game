@@ -30,16 +30,6 @@ Enemy.prototype.isInsideScreen = function() {
 };
 
 
-
-// Enemy.prototype.outScreen = function(){
-//   if((this.y - this.size / 2 > this.canvas.height)){ 
-//     return true;
-//   }else{
-//     console.log((this.y - this.size / 2),this.canvas.height);    
-//     return false;
-//   }
-// }
-
 Enemy.prototype.outScreen = function(){
   console.log("hola..", this.y - this.size / 2),this.canvas.height;
     return (this.y  > this.canvas.height);

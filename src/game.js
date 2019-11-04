@@ -3,9 +3,9 @@
 function Game() {
   this.canvas = null;
   this.ctx = null;
-  this.enemies = []; //Filter to remove if is not into the canvas
+  this.enemies = [];
+  this.bullets = [];
 
-  // this.bulletEnemy = [];
   // this.bulletPlayer = []; //Filter to remove if is not into the canvas
 
   this.player = null;
@@ -47,6 +47,9 @@ Game.prototype.start = function() {
       this.player.setDirection("left");
     } else if (event.key === "ArrowRight") {
       this.player.setDirection("right");
+    } else if(event.which === 32){
+      // console.log("heyy");
+      this.bullet();
     }
   };
 
@@ -60,6 +63,16 @@ Game.prototype.start = function() {
   this.startLoop();
 
 };
+
+
+// Function to create a bullets
+Game.prototype.bullet = function(){
+  console.log("Bullet");
+  var newBullet = new Bullet(this.canvas, this.player.x + this.player.size / 2, this.player.y,  3);
+  this.bullets.push(newBullet);
+}
+
+
 
 Game.prototype.startLoop = function() {
   var loop = function() {
@@ -83,24 +96,34 @@ Game.prototype.startLoop = function() {
 
     // 3. Check if players is going off the screen
     //Check also for computer player
+
     this.player.handleScreenCollision();
 
     // 4. Move existing enemies
     // 5. Check if any enemy is going of the screen
+
     this.enemies = this.enemies.filter(function(enemy) {
       enemy.updatePosition();
       return enemy.isInsideScreen();
     });
 
-    // if(!this.enemies){
-    //   this.player.removeLife();
-    // }
+
+    //move bullets direction
+    this.bullets = this.bullets.filter(function(tiro){
+      tiro.updatePosition();
+      return tiro.isInsideScreen();
+    });
+
 
 
 
 
     // 2. CLEAR THE CANVAS
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+
+
+
 
     // 3. UPDATE THE CANVAS
     // Draw the player
@@ -110,6 +133,15 @@ Game.prototype.startLoop = function() {
     this.enemies.forEach(function(item) {
       item.draw();
     });
+
+    // Draw Bullet
+    this.bullets.forEach(function(bull) {
+      bull.draw();
+    });
+
+
+
+
 
     // 4. TERMINATE LOOP IF GAME IS OVER
     if (!this.gameIsOver) {
@@ -134,8 +166,6 @@ Game.prototype.startLoop = function() {
 Game.prototype.checkCollisions = function() {
   this.enemies.forEach(function(enemy) {
     if (this.player.didCollide(enemy) || enemy.outScreen() ) {
-      console.log("heyy",enemy.outScreen());
-      
       this.player.removeLife();
       
       // Move the enemy off screen to the left
