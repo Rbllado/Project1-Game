@@ -2,7 +2,7 @@
 
 ## Description
 
-Shot play is a game where the are two players into the game. One player will be Computer Player and the other one is going to be the user. The computer player can move in four directions and the movement is random. This computer player is shooting in 4 directions as well. The user is driving the player and can be moved in four directions. User player can shoot a bullet in one direction.
+Shot play is a game where the are a player can move right and left at the bottom of the game. The enemies will come from the top of the screen in differents speeds. If the enemey cross the line of the player three times or crash with the player the game will be over. The player can shoot bullets to attack the enemies.
 
 ## MVP (DOM - CANVAS)
 

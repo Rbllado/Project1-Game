@@ -14,6 +14,8 @@ function Game() {
   this.score = 0;
 }
 
+var that = this;
+
 // Append canvas to the DOM, create a Player and start the Canvas loop
 
 Game.prototype.start = function() {
@@ -90,6 +92,13 @@ Game.prototype.startLoop = function() {
       return enemy.isInsideScreen();
     });
 
+    // if(!this.enemies){
+    //   this.player.removeLife();
+    // }
+
+
+
+
     // 2. CLEAR THE CANVAS
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -120,9 +129,14 @@ Game.prototype.startLoop = function() {
   window.requestAnimationFrame(loop);
 };
 
+
+
 Game.prototype.checkCollisions = function() {
   this.enemies.forEach(function(enemy) {
-    if (this.player.didCollide(enemy)) {
+    if (this.player.didCollide(enemy) || enemy.outScreen()) {
+      console.log("heyy",enemy.outScreen());
+      
+      
       this.player.removeLife();
       // Move the enemy off screen to the left
       enemy.x = 0 - enemy.size;

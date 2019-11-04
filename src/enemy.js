@@ -17,12 +17,40 @@ Enemy.prototype.draw = function() {
 };
 
 Enemy.prototype.updatePosition = function() {
-  // creo que ahora va para abajo los enemigos
+  // Enemies are working well now.
   this.y = this.y + this.speed;
 };
 
 Enemy.prototype.isInsideScreen = function() {
-  // if y plus half of its size is smaller then 0 return
-  //Verificar que funciona esta condicion
-  return this.y + this.size / 2 > 0;
+  
+  //It is not working well, start to say out in the first one outside  but if I type result to return it is not working.
+
+  // var result = this.y - this.size/2 > this.canvas.height;
+  // if(result){
+  //   console.log("out");
+  // }
+  // if(!(this.y - this.size / 2 < this.canvas.height)){
+    
+  // }
+  
+  return this.y - this.size / 2 < this.canvas.height;
 };
+
+
+
+// Enemy.prototype.outScreen = function(){
+//   if(!(this.y - this.size / 2 < this.canvas.height)){ 
+//     console.log("out");
+//     return true;
+//   }else{
+//     return false;
+//   }
+// }
+
+Enemy.prototype.outScreen = function(){
+  console.log("hola..");
+    return !(this.y - this.size / 2 < this.canvas.height);
+    
+    }
+  
+  
