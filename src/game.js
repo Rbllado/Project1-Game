@@ -1,10 +1,13 @@
-'use strict';
+"use strict";
 
 function Game() {
   this.canvas = null;
   this.ctx = null;
-  // this.enemies = [];
-  this.ComputerPlaer = null;
+  this.enemies = []; //Filter to remove if is not into the canvas
+
+  // this.bulletEnemy = [];
+  // this.bulletPlayer = []; //Filter to remove if is not into the canvas
+
   this.player = null;
   this.gameIsOver = false;
   this.gameScreen = null;
@@ -13,34 +16,36 @@ function Game() {
 
 // Append canvas to the DOM, create a Player and start the Canvas loop
 
-
 Game.prototype.start = function() {
   // Save reference to canvas and its container. Create ctx
-  this.canvasContainer = document.querySelector('.canvas-container');
-  this.canvas = this.gameScreen.querySelector('canvas');
-  this.ctx = this.canvas.getContext('2d');
+  this.canvasContainer = document.querySelector(".canvas-container");
+  this.canvas = this.gameScreen.querySelector("canvas");
+  this.ctx = this.canvas.getContext("2d");
 
   // Save reference to the score and lives elements
 
-  this.livesElement = this.gameScreen.querySelector('.lives .value');
+  this.livesElement = this.gameScreen.querySelector(".lives .value");
   this.scoreElement = this.gameScreen.querySelector('.score .value');
 
   // Set the canvas dimensions to match the parent `.canvas-container`
 
-  this.containerWidth = this.canvasContainer.offsetWidth/2;
-  this.containerHeight = this.canvasContainer.offsetHeight/2;
-  this.canvas.setAttribute('width', this.containerWidth);
-  this.canvas.setAttribute('height', this.containerHeight);
+  this.containerWidth = this.canvasContainer.offsetWidth;
+  this.containerHeight = this.canvasContainer.offsetHeight;
+  this.canvas.setAttribute("width", this.containerWidth);
+  this.canvas.setAttribute("height", this.containerHeight);
+
+
 
   // Create a new player for the current game
   this.player = new Player(this.canvas, 3);
 
   // Add event listener for moving the player
+  // I need to move that to left and right arrow
   this.handleKeyDown = function(event) {
-    if (event.key === 'ArrowUp') {
-      this.player.setDirection('up');
-    } else if (event.key === 'ArrowDown') {
-      this.player.setDirection('down');
+    if (event.key === "ArrowUp") {
+      this.player.setDirection("up");
+    } else if (event.key === "ArrowDown") {
+      this.player.setDirection("down");
     }
   };
 
@@ -48,10 +53,11 @@ Game.prototype.start = function() {
   // is always called by window (this === window)!
   // So, we have to bind `this` to the `game` object,
   // to prevent it from pointing to the `window` object
-  document.body.addEventListener('keydown', this.handleKeyDown.bind(this));
+  document.body.addEventListener("keydown", this.handleKeyDown.bind(this));
 
   // Start the canvas requestAnimationFrame loop
   this.startLoop();
+
 };
 
 Game.prototype.startLoop = function() {
@@ -63,12 +69,13 @@ Game.prototype.startLoop = function() {
     //
     //1. I have to create a computer player in a random CaretPosition.
 
-    // if (Math.random() > 0.98) {
-    //   var randomY = this.canvas.height * Math.random();
-    //   this.enemies.push(new Enemy(this.canvas, randomY, 5));
-    // }
-
-
+    // It will be into random X site of screen
+    
+    if (Math.random() > 0.98) {
+      var randomY = this.canvas.height * Math.random();
+      var newEnemy = new Enemy(this.canvas, randomY, 5);
+      this.enemies.push(newEnemy);
+    }
 
     // 2. Check if player had hit any enemy (check with enemy)
     this.checkCollisions();
@@ -76,7 +83,6 @@ Game.prototype.startLoop = function() {
     // 3. Check if players is going off the screen
     //Check also for computer player
     this.player.handleScreenCollision();
-  
 
     // 4. Move existing enemies
     // 5. Check if any enemy is going of the screen
@@ -129,8 +135,11 @@ Game.prototype.checkCollisions = function() {
   }, this);
 };
 
-Game.prototype.passGameOverCallback = function(callback) {
-  this.onGameOverCallback = callback;
+
+Game.prototype.updateGameStats = function() {
+  this.score += 1;
+  this.livesElement.innerHTML = this.player.lives;
+  this.scoreElement.innerHTML = this.score;
 };
 
 Game.prototype.gameOver = function() {
@@ -145,11 +154,11 @@ Game.prototype.removeGameScreen = function() {
   this.gameScreen.remove();
 };
 
-Game.prototype.updateGameStats = function() {
-  this.score += 1;
-  this.livesElement.innerHTML = this.player.lives;
-  this.scoreElement.innerHTML = this.score;
+
+Game.prototype.passGameOverCallback = function(callback) {
+  this.onGameOverCallback = callback;
 };
+
 
 
 
@@ -190,7 +199,7 @@ Game.prototype.updateGameStats = function() {
 
 // document.addEventListener('keydown', function(e) {
 //   console.log(e);
-  
+
 //   switch (e.keyCode) {
 //     case 38: // Up
 //       ghost.moveUp(); //  Updates the position of the ghost
@@ -225,13 +234,12 @@ Game.prototype.updateGameStats = function() {
 
 // function updateCanvas() {
 //   console.log('IN LOOP')
-  
+
 //   // clear the canvas before new (update) rendering
 //   context.clearRect(0, 0, canvas.width, canvas.height);
 //   context.fillStyle = 'white';
 //   context.font = '18px serif';
-  
-  
+
 //   // fillText( text, posX, posY, maxWidth)
 //   context.fillText('Ghost x: ' + ghost.x, canvas.width - 100, 40);
 //   context.fillText('Ghost y: ' + ghost.y, canvas.width - 100, 60);

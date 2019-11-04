@@ -64,6 +64,3 @@ Player.prototype.draw = function() {
 
 
 Player.prototype.bullet = function(){};
-
-// Maybe to change 180 degrees the player.
-Player.prototype.inverse = function(){};

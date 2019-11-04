@@ -13,7 +13,7 @@ html {
 }
 
 
-.container {
+.container1 {
   
   top: 0;
   background-image: url("../images/prueba.jpg");
@@ -77,7 +77,7 @@ button{
 
 /* ---- reset ---- */
 
-/* html {
+html {
     box-sizing: border-box;
   }
   *, *:before, *:after {
@@ -87,12 +87,12 @@ button{
   body {
     margin: 0;
     padding: 0;
-  } */
+  }
   
   
   /* ---- typography ---- */
   
-  /* body {
+  body {
     color: #111;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -107,33 +107,33 @@ button{
   
   p {
     margin: 0;
-  } */
+  }
   
   
   
   /* ---- layout ---- */
   
-  /* html, body {
+  html, body {
     height: 100%;
   } */
   
-  /* .container {
+  .container {
     margin: 0 20px;
   }
-   */
-  /* @media (min-width: 768px) {
+   
+   @media (min-width: 768px) {
     .container {
       max-width: 728px;
       margin: 0 auto;
     }
   }
-   */
+  
   
   
   /* Game Uros */
   
   /* ---- components ---- */
-/*   
+  
   .game {
     text-align: center;
     display: flex;
@@ -165,4 +165,4 @@ button{
   
   .game .canvas-container {
     flex: 1;
-  } */
+  }

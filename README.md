@@ -118,9 +118,9 @@ Character.prototype.rush(){
     Player - Speed
     Player- setDirection
     Player -  Inverse
-    ComputerPlayer - updatePosition
-    ComputerPlayer - isInsideScreen
-    ComputerPlayer - ???? bullet also?
+    Enemy - draw
+    Enemy - updatePosition
+    Enemy - insideScreen
     ```
 
     ## Links
