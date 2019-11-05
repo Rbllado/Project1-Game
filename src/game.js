@@ -17,6 +17,7 @@ function Game() {
 }
 
 var that = this;
+var isDie = false;
 
 Game.prototype.start = function() {
   // Save reference to canvas and its container. Create ctx
@@ -81,9 +82,11 @@ Game.prototype.startLoop = function() {
     // We create random enemies into the game
     if (Math.random() > 0.99) {
       var randomX = this.canvas.height * Math.random();
-      var newEnemy = new Enemy(this.canvas, randomX, 5);
+      var newEnemy = new Enemy(this.canvas, randomX, 2);
       this.enemies.push(newEnemy);
     }
+
+    // this.levels();
 
     // 2. Check if player had hit any enemy (check with enemy) // Check if bullet is collision with enemies
     this.checkCollisions();
@@ -139,8 +142,36 @@ Game.prototype.startLoop = function() {
   window.requestAnimationFrame(loop);
 };
 
-//Check collision with player
+Game.prototype.levels = function(){
+  console.log(this.player.lives);
+  console.log(this.score);
+  
 
+  // Is all time in the loop and crash the screen
+  while(!isDie){
+    console.log(this.player.lives);
+    if(this.player.lives > 0){
+      if(this.score < 2000){
+        if (Math.random() > 0.99) {
+          var randomX = this.canvas.height * Math.random();
+          var newEnemy = new Enemy(this.canvas, randomX, 2);
+          this.enemies.push(newEnemy);
+        }
+      }else if(this.score < 100000 ){
+        if (Math.random() > 0.99) {
+          var randomX = this.canvas.height * Math.random();
+          var newEnemy = new Enemy(this.canvas, randomX, 5);
+          this.enemies.push(newEnemy);
+        }
+      }
+    }else{
+      return false;
+    }
+  }
+};
+
+
+//Check collision with player
 Game.prototype.checkCollisions = function() {
   this.enemies.forEach(function(enemy) {
     if (this.player.didCollide(enemy) || enemy.outScreen()) {
@@ -177,6 +208,7 @@ Game.prototype.updateGameStats = function() {
   this.livesElement.innerHTML = this.player.lives;
   this.scoreElement.innerHTML = this.score;
 };
+
 
 Game.prototype.gameOver = function() {
   this.gameIsOver = true;

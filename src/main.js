@@ -6,16 +6,16 @@ function buildDom(htmlString) {
   return div.children[0];
 }
 
-function playSound() {
-  setTimeout(function(){introductionSound.play()},100);
-}
+// function playSound() {
+//   setTimeout(function(){introductionSound.play()},100);
+// }
 
 function main() {
   var game; // instance of the Game
   var splashScreen; // Start Screen
   var gameOverScreen; // Game Over Screen
 
-  var introductionSound = new Audio("../sounds/StarWars.mp3");
+  // var introductionSound = new Audio("../sounds/StarWars.mp3");
 
   // -- splash screen
 
@@ -23,7 +23,7 @@ function main() {
 
   function createSplashScreen() {
 
-    playSound();
+    // playSound();
 
     splashScreen = buildDom(`
 
@@ -63,7 +63,7 @@ function main() {
 
     var startButton = splashScreen.querySelector("#btn-player1");
     startButton.addEventListener("click", function() {
-      introductionSound.pause();
+      // introductionSound.pause();
       startGame();
     });
   }
