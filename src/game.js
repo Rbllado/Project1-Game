@@ -156,11 +156,12 @@ Game.prototype.checkCollisionBullet = function() {
     this.enemies.forEach(function(enemy) {
 
       if (bull.didCollide(enemy)) {
-        console.log("hit");
         
+        enemy.explosion(enemy.x, enemy.y, enemy.size);
         // Move the enemy and the bullet off screen to the left
-        enemy.y = this.canvas.height + enemy.size;
-        bull.y = this.canvas.height + enemy.size;
+        // enemy.y = this.canvas.height + enemy.size;
+        // bull.y = this.canvas.height + enemy.size;
+
       }
     }, this);
   }, this);

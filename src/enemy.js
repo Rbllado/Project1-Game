@@ -38,5 +38,15 @@ Enemy.prototype.isInsideScreen = function() {
 Enemy.prototype.outScreen = function(){
     return (this.y  > this.canvas.height);
   }
+
+Enemy.prototype.explosion = function(x, y, size){
+  console.log("Boom");
+  
+  let img = new Image(); // Create new <img> element
+  img.src = "../images/explosion.jpg"; // Set source path
+  
+  // Render the image on the canvas
+  this.ctx.drawImage(img, this.x, this.y, this.size, this.size);
+}
   
   
