@@ -24,14 +24,12 @@ Enemy.prototype.updatePosition = function() {
 Enemy.prototype.isInsideScreen = function() {
   
   //It is not working well, start to say out in the first one outside  but if I type result to return it is not working.
-  console.log("I am in");
   
   return this.y - this.size / 2 < this.canvas.height;
 };
 
 
 Enemy.prototype.outScreen = function(){
-  console.log("hola..", this.y - this.size / 2),this.canvas.height;
     return (this.y  > this.canvas.height);
   }
   

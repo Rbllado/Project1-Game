@@ -16,9 +16,9 @@ Bullet.prototype.handleScreenCollision = function() {
   else if (this.y < screenTop) this.direction = 1;
 };
 
-Bullet.prototype.draw = function(){
-    this.ctx.fillStyle = "#FF6F27";
-    this.ctx.fillRect(this.x, this.y, this.size, this.size);
+Bullet.prototype.draw = function() {
+  this.ctx.fillStyle = "#blue";
+  this.ctx.fillRect(this.x, this.y, this.size, this.size);
 };
 
 Bullet.prototype.updatePosition = function() {
@@ -33,23 +33,32 @@ Bullet.prototype.isInsideScreen = function() {
 Bullet.prototype.didCollide = function(enemy) {
   //check the collision with the computerPlayer
 
-  var playerLeft = this.x;
-  var playerRight = this.x + this.size;
-  var playerTop = this.y;
-  var playerBottom = this.y + this.size;
+  // var bulletLeft = this.x;
+  // var bulletRight = this.x + this.size;
+  // var bulletTop = this.y;
+  // var bulletBottom = this.y + this.size;
 
-  var enemyLeft = enemy.x;
-  var enemyRight = enemy.x + enemy.size;
-  var enemyTop = enemy.y;
-  var enemyBottom = enemy.y + enemy.size;
+  // var enemyLeft = enemy.x;
+  // var enemyRight = enemy.x + enemy.size;
+  // var enemyTop = enemy.y;
+  // var enemyBottom = enemy.y + enemy.size;
 
-  var crossRight = enemyLeft <= playerRight && enemyLeft >= playerLeft;
-  var crossLeft = enemyRight >= playerLeft && enemyRight <= playerRight;
-  var crossTop = enemyBottom >= playerTop && enemyBottom <= playerBottom;
-  var crossBottom = enemyTop <= playerBottom && enemyTop >= playerTop;
+  // var crossRight = bulletRight <= enemyLeft   && bulletLeft >= enemyLeft  ;
+  // var crossLeft =  bulletLeft >= enemyRight  && bulletRight <=  enemyRight;
+  // var crossTop = bulletTop >=  enemyBottom &&  bulletBottom <= enemyBottom;
+  // var crossBottom =  bulletBottom <= enemyTop  &&  bulletTop >= enemyTop;
 
-  if ((crossRight || crossLeft) && (crossBottom || crossTop)) {
-    return true;
-  }
-  return false;
+  // if ((crossRight || crossLeft) && (crossBottom || crossTop)) {
+  //   return true;
+  // }
+  // return false;
+
+  var yShot = enemy.x < this.x && this.x < enemy.x + enemy.size;
+  var xShot = enemy.y < this.y && enemy.y + enemy.size > this.y;
+
+  var test = this.x  < enemy.x && this.x +this.size > enemy.x;
+  var test2 = this.y < enemy.y && this.y + this.size > enemy.y;
+  
+  return (xShot && yShot) || (test && test2);
+
 };

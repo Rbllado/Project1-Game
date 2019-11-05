@@ -33,7 +33,7 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("height", this.containerHeight);
 
   // Create a new player for the current game
-  this.player = new Player(this.canvas, 3);
+  this.player = new Player(this.canvas, 1000);
 
   //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
@@ -42,7 +42,7 @@ Game.prototype.start = function() {
     } else if (event.key === "ArrowRight") {
       this.player.setDirection("right");
     } else if (event.which === 32) {
-      // console.log("heyy");
+      
       this.bullet();
     }
   };
@@ -73,14 +73,15 @@ Game.prototype.startLoop = function() {
   var loop = function() {
     // 1. UPDATE THE STATE OF PLAYER
     // We create random enemies into the game
-    if (Math.random() > 0.991) {
+    if (Math.random() > 0.99) {
       var randomX = this.canvas.height * Math.random();
-      var newEnemy = new Enemy(this.canvas, randomX, 4);
+      var newEnemy = new Enemy(this.canvas, randomX, 1);
       this.enemies.push(newEnemy);
     }
 
     // 2. Check if player had hit any enemy (check with enemy) // Check if bullet is collision with enemies
     this.checkCollisions();
+
     this.checkCollisionBullet();
 
     // 3. Check if players is going off the screen
@@ -106,13 +107,15 @@ Game.prototype.startLoop = function() {
     // Draw the player // Draw the enemies // Draw Bullet
     this.player.draw();
 
+    this.bullets.forEach(function(bull) {
+      bull.draw();
+    });
+    
     this.enemies.forEach(function(item) {
       item.draw();
     });
 
-    this.bullets.forEach(function(bull) {
-      bull.draw();
-    });
+    
 
     // 4. TERMINATE LOOP IF GAME IS OVER
     if (!this.gameIsOver) {
@@ -149,8 +152,12 @@ Game.prototype.checkCollisions = function() {
 // This one is checking if the bullet hits an enemy
 Game.prototype.checkCollisionBullet = function() {
   this.bullets.forEach(function(bull) {
+
     this.enemies.forEach(function(enemy) {
+
       if (bull.didCollide(enemy)) {
+        console.log("hit");
+        
         // Move the enemy and the bullet off screen to the left
         enemy.y = this.canvas.height + enemy.size;
         bull.y = this.canvas.height + enemy.size;
@@ -158,6 +165,7 @@ Game.prototype.checkCollisionBullet = function() {
     }, this);
   }, this);
 };
+
 
 Game.prototype.updateGameStats = function() {
   this.score += 1;

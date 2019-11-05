@@ -8,7 +8,9 @@ function Player(canvas, lives) {
   this.x = canvas.width / 2;
   this.y = canvas.height - 50;
   this.direction = 0;
-  this.speed = 5;
+  this.speed = 4;
+  // this.image = new Image();
+  // this.image.src = '../images/nave2Starwars.jpg';
 }
 
 Player.prototype.setDirection = function(direction) {
