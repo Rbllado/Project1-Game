@@ -110,16 +110,22 @@ html {
   
   html, body {
     height: 100%;
+    background-image: url("../images/StarWarsGame.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
   } */
   
   .container {
     margin: 0 20px;
+    
+
   }
    
    @media (min-width: 768px) {
     .container {
       max-width: 728px;
       margin: 0 auto;
+      
     }
   }
   
