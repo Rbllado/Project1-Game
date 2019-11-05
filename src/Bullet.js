@@ -3,7 +3,7 @@ function Bullet(canvas, playerX, playerY, speed) {
   this.ctx = canvas.getContext("2d");
   this.x = playerX;
   this.y = playerY;
-  this.size = 10;
+  this.size = 30;
   this.speed = speed;
 }
 
@@ -17,8 +17,14 @@ Bullet.prototype.handleScreenCollision = function() {
 };
 
 Bullet.prototype.draw = function() {
-  this.ctx.fillStyle = "#blue";
-  this.ctx.fillRect(this.x, this.y, this.size, this.size);
+  // this.ctx.fillStyle = "#blue";
+  // this.ctx.fillRect(this.x, this.y, this.size, this.size);
+
+  let img = new Image(); // Create new <img> element
+  img.src = "../images/sword2.png"; // Set source path
+  
+  // Render the image on the canvas
+  this.ctx.drawImage(img, this.x, this.y, this.size, this.size);
 };
 
 Bullet.prototype.updatePosition = function() {
@@ -32,26 +38,6 @@ Bullet.prototype.isInsideScreen = function() {
 
 Bullet.prototype.didCollide = function(enemy) {
   //check the collision with the computerPlayer
-
-  // var bulletLeft = this.x;
-  // var bulletRight = this.x + this.size;
-  // var bulletTop = this.y;
-  // var bulletBottom = this.y + this.size;
-
-  // var enemyLeft = enemy.x;
-  // var enemyRight = enemy.x + enemy.size;
-  // var enemyTop = enemy.y;
-  // var enemyBottom = enemy.y + enemy.size;
-
-  // var crossRight = bulletRight <= enemyLeft   && bulletLeft >= enemyLeft  ;
-  // var crossLeft =  bulletLeft >= enemyRight  && bulletRight <=  enemyRight;
-  // var crossTop = bulletTop >=  enemyBottom &&  bulletBottom <= enemyBottom;
-  // var crossBottom =  bulletBottom <= enemyTop  &&  bulletTop >= enemyTop;
-
-  // if ((crossRight || crossLeft) && (crossBottom || crossTop)) {
-  //   return true;
-  // }
-  // return false;
 
   var yShot = enemy.x < this.x && this.x < enemy.x + enemy.size;
   var xShot = enemy.y < this.y && enemy.y + enemy.size > this.y;

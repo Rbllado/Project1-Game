@@ -33,7 +33,7 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("height", this.containerHeight);
 
   // Create a new player for the current game
-  this.player = new Player(this.canvas, 1000);
+  this.player = new Player(this.canvas, 1);
 
   //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
@@ -110,7 +110,7 @@ Game.prototype.startLoop = function() {
     this.bullets.forEach(function(bull) {
       bull.draw();
     });
-    
+
     this.enemies.forEach(function(item) {
       item.draw();
     });

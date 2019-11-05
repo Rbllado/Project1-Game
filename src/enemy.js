@@ -3,7 +3,7 @@
 function Enemy(canvas, x, speed) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.size = 30;
+  this.size = 40;
   this.x = x;
   // Creo que no esta bien, le he puesto a groso modo.
   this.y = 20;

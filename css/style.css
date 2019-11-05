@@ -16,7 +16,7 @@
 .container1 {
   
   top: 0;
-  background-image: url("../images/prueba.jpg");
+  /* background-image: url("../images/prueba.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   
@@ -62,7 +62,7 @@ button{
 }
 
 .players{
-    background-color: gainsboro;
+    background-color: grey;
 }
 .players img{
     height: 100px;
@@ -140,7 +140,7 @@ html {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: blue;
+    background-color: cadetblue;
     padding-top: 20px;
   }
   

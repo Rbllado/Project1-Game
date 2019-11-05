@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 function buildDom(htmlString) {
-  var div = document.createElement('div');
+  var div = document.createElement("div");
   div.innerHTML = htmlString;
   return div.children[0];
 }
@@ -17,13 +17,13 @@ function main() {
     splashScreen = buildDom(`
 
     <main class="container1">
-        <section class="title">
-            <h2>Project Game</h2>
-        </section>
+      <section class="title">
+        <h2>Project Game</h2>
+      </section>
         <section class="player-class">
             <div class="players" id="player1">
-                <img src="./images/brucelee.jpg" alt="Image Player"></img>
-                <h4>Bruce</h4>
+                <img src="./images/DarthVader.jpg" alt="Image Player"></img>
+                <h4>Darth Vader</h4>
                 <button id="btn-player1">Select</button>
             </div>
 
@@ -51,8 +51,8 @@ function main() {
 
     document.body.appendChild(splashScreen);
 
-    var startButton = splashScreen.querySelector('#btn-player1');
-    startButton.addEventListener('click', function() {
+    var startButton = splashScreen.querySelector("#btn-player1");
+    startButton.addEventListener("click", function() {
       startGame();
     });
   }
@@ -60,8 +60,6 @@ function main() {
   function removeSplashScreen() {
     splashScreen.remove();
   }
-
-
 
   // -- game screen
 
@@ -103,10 +101,10 @@ function main() {
     </main>
     `);
 
-    var button = gameOverScreen.querySelector('button');
-    button.addEventListener('click', startGame);
+    var button = gameOverScreen.querySelector("button");
+    button.addEventListener("click", startGame);
 
-    var span = gameOverScreen.querySelector('span');
+    var span = gameOverScreen.querySelector("span");
     span.innerText = score;
 
     document.body.appendChild(gameOverScreen);
@@ -117,8 +115,6 @@ function main() {
       gameOverScreen.remove();
     }
   }
-
-
 
   // -- Setting the game state
 
@@ -147,4 +143,4 @@ function main() {
   createSplashScreen();
 }
 
-window.addEventListener('load', main);
+window.addEventListener("load", main);
