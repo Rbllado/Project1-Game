@@ -9,8 +9,6 @@ function Player(canvas, lives) {
   this.y = canvas.height - 50;
   this.direction = 0;
   this.speed = 4;
-  // this.image = new Image();
-  // this.image.src = '../images/nave2Starwars.jpg';
 }
 
 Player.prototype.setDirection = function(direction) {
@@ -58,6 +56,9 @@ Player.prototype.removeLife = function() {
 
 Player.prototype.draw = function() {
   this.ctx.fillStyle = "#66D3FA";
-  // fillRect(x, y, width, height)
-  this.ctx.fillRect(this.x, this.y, this.size, this.size);
+  let img = new Image(); // Create new <img> element
+  img.src = "../images/DarthVader.jpg"; // Set source path
+  
+  // Render the image on the canvas
+  this.ctx.drawImage(img, this.x, this.y, this.size, this.size);
 };
