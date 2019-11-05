@@ -8,7 +8,7 @@ function Player(canvas, lives) {
   this.x = canvas.width / 2;
   this.y = canvas.height - 50;
   this.direction = 0;
-  this.speed = 4;
+  this.speed = 10;
 }
 
 Player.prototype.setDirection = function(direction) {

@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 function Game() {
   this.canvas = null;
   this.ctx = null;
@@ -10,6 +12,8 @@ function Game() {
   this.gameIsOver = false;
   this.gameScreen = null;
   this.score = 0;
+  this.explosionSound = new Audio("../sounds/Explosion.m4a");
+  this.shotSound = new Audio("../sounds/Tiro.m4a");
 }
 
 var that = this;
@@ -33,7 +37,7 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("height", this.containerHeight);
 
   // Create a new player for the current game
-  this.player = new Player(this.canvas, 1);
+  this.player = new Player(this.canvas, 5);
 
   //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
@@ -42,8 +46,9 @@ Game.prototype.start = function() {
     } else if (event.key === "ArrowRight") {
       this.player.setDirection("right");
     } else if (event.which === 32) {
-      
       this.bullet();
+      this.shotSound.volume = 0.1;
+      this.shotSound.play();
     }
   };
 
@@ -66,6 +71,7 @@ Game.prototype.bullet = function() {
     this.player.y,
     3
   );
+
   this.bullets.push(newBullet);
 };
 
@@ -75,7 +81,7 @@ Game.prototype.startLoop = function() {
     // We create random enemies into the game
     if (Math.random() > 0.99) {
       var randomX = this.canvas.height * Math.random();
-      var newEnemy = new Enemy(this.canvas, randomX, 1);
+      var newEnemy = new Enemy(this.canvas, randomX, 5);
       this.enemies.push(newEnemy);
     }
 
@@ -113,9 +119,8 @@ Game.prototype.startLoop = function() {
 
     this.enemies.forEach(function(item) {
       item.draw();
+      item.explosion(200, 200, 40, 40);
     });
-
-    
 
     // 4. TERMINATE LOOP IF GAME IS OVER
     if (!this.gameIsOver) {
@@ -152,21 +157,20 @@ Game.prototype.checkCollisions = function() {
 // This one is checking if the bullet hits an enemy
 Game.prototype.checkCollisionBullet = function() {
   this.bullets.forEach(function(bull) {
-
     this.enemies.forEach(function(enemy) {
-
       if (bull.didCollide(enemy)) {
-        
-        enemy.explosion(enemy.x, enemy.y, enemy.size);
-        // Move the enemy and the bullet off screen to the left
-        // enemy.y = this.canvas.height + enemy.size;
-        // bull.y = this.canvas.height + enemy.size;
+        this.explosionSound.play();
+        this.explosionSound.volume = 0.2;
+        // enemy.explosion(enemy.x, enemy.y, enemy.size);
 
+
+        // Move the enemy and the bullet off screen to the left
+        enemy.y = this.canvas.height + enemy.size;
+        bull.y = this.canvas.height + enemy.size;
       }
     }, this);
   }, this);
 };
-
 
 Game.prototype.updateGameStats = function() {
   this.score += 1;

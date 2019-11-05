@@ -40,13 +40,13 @@ Enemy.prototype.outScreen = function(){
   }
 
 Enemy.prototype.explosion = function(x, y, size){
-  console.log("Boom");
+  console.log("Boom", Math.floor(x), y, size);
   
   let img = new Image(); // Create new <img> element
   img.src = "../images/explosion.jpg"; // Set source path
   
   // Render the image on the canvas
-  this.ctx.drawImage(img, this.x, this.y, this.size, this.size);
+  this.ctx.drawImage(img, x, y, size, size);
 }
   
   
