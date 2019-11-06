@@ -57,7 +57,7 @@ Player.prototype.removeLife = function() {
 Player.prototype.draw = function() {
   this.ctx.fillStyle = "#66D3FA";
   let img = new Image(); // Create new <img> element
-  img.src = "../images/DarthVader.jpg"; // Set source path
+  img.src = "./images/DarthVader.jpg"; // Set source path
   
   // Render the image on the canvas
   this.ctx.drawImage(img, this.x, this.y, this.size, this.size);

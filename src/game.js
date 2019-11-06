@@ -10,8 +10,8 @@ function Game() {
   this.gameIsOver = false;
   this.gameScreen = null;
   this.score = 0;
-  this.explosionSound = new Audio("../sounds/Grenade.wav");
-  this.shotSound = new Audio("../sounds/shot.wav");
+  this.explosionSound = new Audio("./sounds/Grenade.wav");
+  this.shotSound = new Audio("./sounds/shot.wav");
 }
 
 var that = this;

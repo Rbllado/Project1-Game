@@ -21,7 +21,7 @@ Bullet.prototype.draw = function() {
   // this.ctx.fillRect(this.x, this.y, this.size, this.size);
 
   let img = new Image(); // Create new <img> element
-  img.src = "../images/sword2.png"; // Set source path
+  img.src = "./images/sword2.png"; // Set source path
   
   // Render the image on the canvas
   this.ctx.drawImage(img, this.x, this.y, this.size, this.size);

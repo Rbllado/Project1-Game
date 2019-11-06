@@ -12,7 +12,7 @@ function main() {
   var splashScreen; // Start Screen
   var gameOverScreen; // Game Over Screen
 
-  var introductionSound = new Audio("../sounds/StarWars.mp3");
+  var introductionSound = new Audio("./sounds/StarWars.mp3");
 
 
   // -- splash screen

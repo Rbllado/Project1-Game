@@ -110,7 +110,7 @@ html {
   
   html, body {
     height: 100%;
-    background-image: url("../images/starwarsSpace.jpg");
+    background-image: url("./images/starwarsSpace.jpg");
     background-size: cover;
     background-repeat: no-repeat;
   } */
@@ -169,7 +169,7 @@ html {
   .game .canvas-container {
     flex: 1;
     background-color: black;
-    background-image: url("../images/space.jpg");
+    background-image: url("./images/space.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     margin: 20px;
@@ -178,7 +178,7 @@ html {
   .game-over {
   
     top: 0;
-    background-image: url("../images/gameOver.png");
+    background-image: url("./images/gameOver.png");
     background-size: cover;
     background-repeat: no-repeat;
     

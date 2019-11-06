@@ -16,7 +16,7 @@ Enemy.prototype.draw = function() {
   // this.ctx.fillRect(this.x, this.y, this.size, this.size);
 
   let img = new Image(); // Create new <img> element
-  img.src = "../images/nave2Starwars.jpg"; // Set source path
+  img.src = "./images/nave2Starwars.jpg"; // Set source path
   
   // Render the image on the canvas
   this.ctx.drawImage(img, this.x, this.y, this.size, this.size);
@@ -43,7 +43,7 @@ Enemy.prototype.explosion = function(x, y, size){
   console.log("Boom", Math.floor(x), y, size);
   
   let img = new Image(); // Create new <img> element
-  img.src = "../images/explosion.jpg"; // Set source path
+  img.src = "./images/explosion.jpg"; // Set source path
   
   // Render the image on the canvas
   this.ctx.drawImage(img, x, y, size, size);
