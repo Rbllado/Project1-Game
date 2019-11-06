@@ -6,24 +6,20 @@ function buildDom(htmlString) {
   return div.children[0];
 }
 
-// function playSound() {
-//   setTimeout(function(){introductionSound.play()},100);
-// }
 
 function main() {
   var game; // instance of the Game
   var splashScreen; // Start Screen
   var gameOverScreen; // Game Over Screen
 
-  // var introductionSound = new Audio("../sounds/StarWars.mp3");
+  var introductionSound = new Audio("../sounds/StarWars.mp3");
+
 
   // -- splash screen
 
-
-
   function createSplashScreen() {
-
-    // playSound();
+    
+    playSound();
 
     splashScreen = buildDom(`
 
@@ -63,7 +59,7 @@ function main() {
 
     var startButton = splashScreen.querySelector("#btn-player1");
     startButton.addEventListener("click", function() {
-      // introductionSound.pause();
+      introductionSound.pause();
       startGame();
     });
   }
@@ -129,6 +125,12 @@ function main() {
 
   // -- Setting the game state
 
+  function playSound() {
+    setTimeout(function(){
+      introductionSound.play()
+    },1000);
+  }
+
   function startGame() {
     removeSplashScreen();
     // later we need to add clearing of the gameOverScreen
@@ -136,6 +138,7 @@ function main() {
 
     game = new Game();
     game.gameScreen = createGameScreen();
+    
 
     game.start();
     // End the game
