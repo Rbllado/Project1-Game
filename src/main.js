@@ -18,14 +18,12 @@ function main() {
   // -- splash screen
 
   function createSplashScreen() {
-    
-    playSound();
 
     splashScreen = buildDom(`
 
     <main class="container1">
       <section class="title">
-        <h2>Project Game</h2>
+        <h2>Battle Space</h2>
       </section>
         <section class="player-class">
             <div class="players" id="player1">
@@ -33,6 +31,7 @@ function main() {
                 <h4>Darth Vader</h4>
                 <button id="btn-player1">Select</button>
             </div>
+            <audio id = "intro" src="../sounds/StarWars.mp3" preload="auto" autoplay loop></audio>
 
             <!-- <div class="players">
                 <img src="" alt="Image Player"></img>
@@ -57,12 +56,16 @@ function main() {
   `);
     document.body.appendChild(splashScreen);
 
+
     var startButton = splashScreen.querySelector("#btn-player1");
     startButton.addEventListener("click", function() {
       introductionSound.pause();
       startGame();
     });
+
+
   }
+
 
   function removeSplashScreen() {
     splashScreen.remove();

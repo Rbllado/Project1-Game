@@ -36,7 +36,7 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("height", this.containerHeight);
 
   // Create a new player for the current game
-  this.player = new Player(this.canvas, 1000);
+  this.player = new Player(this.canvas, 10);
 
   //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
@@ -79,21 +79,8 @@ Game.prototype.bullet = function() {
 Game.prototype.startLoop = function() {
   var loop = function() {
     // 1. UPDATE THE STATE OF PLAYER
-    // We create random enemies into the game
-    // if (this.score < 500) {
-    //   if (Math.random() > 0.99) {
-    //     var randomX = this.canvas.height * Math.random();
-    //     var newEnemy = new Enemy(this.canvas, randomX, 2);
-    //     this.enemies.push(newEnemy);
-    //   }
-    // } else if (this.score > 500) {
-    //   if (Math.random() > 0.9) {
-    //     var randomX = this.canvas.height * Math.random();
-    //     var newEnemy = new Enemy(this.canvas, randomX, 20);
-    //     this.enemies.push(newEnemy);
-    //   }
-    // }
-
+    
+    //The enemies are going to come in diferent speeds and random depending the 
     this.levels();
 
     // 2. Check if player had hit any enemy (check with enemy) // Check if bullet is collision with enemies
@@ -130,7 +117,6 @@ Game.prototype.startLoop = function() {
 
     this.enemies.forEach(function(item) {
       item.draw();
-      item.explosion(200, 200, 40, 40);
     });
 
     // 4. TERMINATE LOOP IF GAME IS OVER
