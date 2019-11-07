@@ -143,14 +143,14 @@ Game.prototype.levels = function(player) {
   var randomX = 0;
   var newEnemy;
   // Is all time in the loop and crash the screen
-  if (this.score < 1000) {
+  if (this.score < 30) {
     if (Math.random() > 0.99) {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 2);
       this.enemies.push(newEnemy);
       player.speed = 5;
     }
-  } else if (this.score < 1500) {
+  } else if (this.score < 75) {
     if (Math.random() > 0.97) {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 4);
@@ -158,7 +158,7 @@ Game.prototype.levels = function(player) {
       player.speed = 8;
     }
   } else {
-    if (Math.random() > 0.94) {
+    if (Math.random() > 0.95) {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 8);
       this.enemies.push(newEnemy);

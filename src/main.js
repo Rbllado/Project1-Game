@@ -31,7 +31,7 @@ function main() {
                 <h4>Darth Vader</h4>
                 <button id="btn-player1">Select</button>
             </div>
-            <audio id = "intro" src="../sounds/StarWars.mp3" preload="auto" autoplay loop></audio>
+            <audio id = "intro" src="./sounds/StarWars.mp3" preload="auto" autoplay loop></audio>
 
             <!-- <div class="players">
                 <img src="" alt="Image Player"></img>
