@@ -121,6 +121,7 @@ Character.prototype.rush(){
     Enemy - draw
     Enemy - updatePosition
     Enemy - insideScreen
+    Enermy - OutOfScreen
     ```
 
     ## Links
@@ -130,7 +131,7 @@ Character.prototype.rush(){
   https://trello.com/b/3Mwm5Ewc/project1
   
   ###  Git
-  URls for the project repo and deploy Link Repo Link Deploy
+  URls for the project repo and deploy Link Repo ![alt tag ](https://rbllado.github.io/Project1-Game/) link Deploy
 
   ### Slides
   URls for the project presentation (slides) Link Slides.com 
