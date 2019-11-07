@@ -13,6 +13,8 @@ function Game() {
   this.explosionSound = new Audio("../sounds/Grenade.wav");
   this.shotSound = new Audio("../sounds/shot.wav");
   this.explosion = "../images/explosion.jpg";
+  this.countLoop =0;
+  this.timeInterval = null;
   // this.explosion.src = "../images/explosion.jpg"; // Set source path
 }
 
@@ -38,7 +40,7 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("height", this.containerHeight);
 
   // Create a new player for the current game
-  this.player = new Player(this.canvas, 1);
+  this.player = new Player(this.canvas, 10);
 
   //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
@@ -169,9 +171,13 @@ Game.prototype.levels = function(player) {
 Game.prototype.checkCollisions = function() {
   this.enemies.forEach(function(enemy) {
     if (this.player.didCollide(enemy) || enemy.outScreen()) {
+
+      console.log("remove life");
+      
       this.player.removeLife();
       // Move the enemy off screen to the left
       enemy.y = this.canvas.height + enemy.size;
+
       if (this.player.lives === 0) {
         this.gameOver();
       }
@@ -186,50 +192,40 @@ Game.prototype.checkCollisionBullet = function() {
       if (bull.didCollide(enemy)) {
         
         // this.ctx.drawImage(this.explosion, Math.floor(enemy.x), enemy.y, enemy.size, enemy.size);
-
-        
         enemy.imgSrc = this.explosion;
         
-        
-        
-        console.log("drawwwwwwwwwww", enemy) ;
 
         this.explosionSound.pause();
         this.explosionSound.currentTime = 0;
         this.explosionSound.play();
         this.explosionSound.volume = 0.1;
 
-        // Render the image on the canvas
-
-        // enemy.explosion(200, 200, 40);
-
-        // enemy.explosion(enemy.x, enemy.y, enemy.size);
-
-        // setTimeout(this.removeEnemy(enemy, bull), 6000);
-        
-        setTimeout(() => {
+        // this.removeEnemy(enemy, bull);
+          
+        this.timeInterval = setTimeout(() => {
           this.removeEnemy(enemy, bull)
-        }, 250);
+        }, 100);
 
         // Move the enemy and the bullet off screen to the left
       }
     }, this);
   }, this);
 };
-Game.prototype.removeEnemy = function(enemy, bull) {
-  enemy.y = this.canvas.height + enemy.size;
-  bull.y = this.canvas.height + enemy.size;
-};
 
-Game.prototype.updateGameStats = function() {
-  this.score += 1;
-  this.livesElement.innerHTML = this.player.lives;
-  this.scoreElement.innerHTML = this.score;
-};
+Game.prototype.removeEnemy = function(enemy, bull) {
+  // enemy.y = this.canvas.height + enemy.size;
+  bull.y = this.canvas.height + enemy.size;
+  // enemy.y = 1 - this.canvas.height;
+  // enemy.y = 1 - this.canvas.height;
+  enemy.x = 0;
+  enemy.y = 0 - this.canvas.height;
+  enemy.speed = 0;
+}; 
+
 
 Game.prototype.gameOver = function() {
   this.gameIsOver = true;
-
+  
   // Call the gameOver function from `main` to show the Game Over Screen
   this.onGameOverCallback();
 };
@@ -241,3 +237,27 @@ Game.prototype.removeGameScreen = function() {
 Game.prototype.passGameOverCallback = function(callback) {
   this.onGameOverCallback = callback;
 };
+
+Game.prototype.updateGameStats = function() {
+  this.countLoop ++;
+
+  if(this.countLoop % 60 ===0){
+    Math.floor(this.countLoop/60)
+  }
+  this.score = Math.floor(this.countLoop/60);
+  this.livesElement.innerHTML = this.player.lives;
+  this.scoreElement.innerHTML = this.score;
+};
+
+// Game.prototype.timeCheck(){
+
+// this.countLoop ++;
+
+// if(this.countLoop % 60 ===0){
+//   this.score = Math.floor(this.countLoop/60);
+
+//   //ñadir en el html
+//   this.timerElement.innerHTML = this.score + " seconds";
+// }
+  
+// }

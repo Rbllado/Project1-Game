@@ -17,7 +17,7 @@ Enemy.prototype.draw = function() {
   // this.ctx.fillStyle = '#FF6F27';
   // fillRect(x, y, width, height)
   // this.ctx.fillRect(this.x, this.y, this.size, this.size);
-  
+
   this.img.src = this.imgSrc;
   
   // Render the image on the canvas
@@ -30,16 +30,13 @@ Enemy.prototype.updatePosition = function() {
 };
 
 Enemy.prototype.isInsideScreen = function() {
-  
-  //It is not working well, start to say out in the first one outside  but if I type result to return it is not working.
-  
-  return this.y - this.size / 2 < this.canvas.height;
+  return this.y - this.size / 2 < this.canvas.height ;
 };
 
 
 Enemy.prototype.outScreen = function(){
-    return (this.y  > this.canvas.height);
-  }
+  return (this.y  > this.canvas.height);
+}
 
 Enemy.prototype.explosion = function(x, y, size){
   console.log("Boom", Math.floor(x), y, size);
