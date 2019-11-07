@@ -10,6 +10,8 @@ function Enemy(canvas, x, speed) {
   this.speed = speed;
   this.img = new Image(); // Create new <img> element
   this.imgSrc = "./images/nave2Starwars.jpg"; // Set source path
+  this.explosionImg = new Image(); // Create new <img> element
+  this.explosionImg.src = "./images/explosion.jpg";
  
 }
 
@@ -43,10 +45,10 @@ Enemy.prototype.explosion = function(x, y, size){
   var x = Math.floor(x);
   console.log(x);
   
-  let img = new Image(); // Create new <img> element
-  img.src = "./images/explosion.jpg"; // Set source path
+  // let img = new Image(); // Create new <img> element
+  // img.src = "./images/explosion.jpg"; // Set source path
   // Render the image on the canvas
-  this.ctx.drawImage(img, x, y, size, size);
+  this.ctx.drawImage(this.explosionImg, x, y, size, size);
   console.log("image");
   
 }

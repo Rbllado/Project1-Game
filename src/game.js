@@ -10,9 +10,9 @@ function Game() {
   this.gameIsOver = false;
   this.gameScreen = null;
   this.score = 0;
-  this.explosionSound = new Audio("../sounds/Grenade.wav");
-  this.shotSound = new Audio("../sounds/shot.wav");
-  this.explosion = "../images/explosion.jpg";
+  this.explosionSound = new Audio("./sounds/Grenade.wav");
+  this.shotSound = new Audio("./sounds/shot.wav");
+  this.explosion = "./images/explosion.jpg";
   this.countLoop =0;
   this.timeInterval = null;
   // this.explosion.src = "../images/explosion.jpg"; // Set source path
