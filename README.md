@@ -1,4 +1,4 @@
-# Shot Play
+# Battle Space
 
 ## Description
 
@@ -131,7 +131,7 @@ Character.prototype.rush(){
   https://trello.com/b/3Mwm5Ewc/project1
   
   ###  Git
-  URls for the project repo and deploy Link Repo ![alt tag ](https://rbllado.github.io/Project1-Game/) link Deploy
+  URls for the project repo and deploy [Link Repo](https://github.com/Rbllado/Project1-Game) [link Deploy](https://rbllado.github.io/Project1-Game/) 
 
   ### Slides
-  URls for the project presentation (slides) Link Slides.com 
+  URls for the project presentation (slides) [Link Slides.com](https://docs.google.com/presentation/d/1RE1qeJk4JLlrR4Z3FKMXwW24MKivENJ31IjLCWa_jRM/edit#slide=id.p)
