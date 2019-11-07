@@ -12,6 +12,8 @@ function Game() {
   this.score = 0;
   this.explosionSound = new Audio("../sounds/Grenade.wav");
   this.shotSound = new Audio("../sounds/shot.wav");
+  this.explosion = "../images/explosion.jpg";
+  // this.explosion.src = "../images/explosion.jpg"; // Set source path
 }
 
 var that = this;
@@ -36,7 +38,7 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("height", this.containerHeight);
 
   // Create a new player for the current game
-  this.player = new Player(this.canvas, 10);
+  this.player = new Player(this.canvas, 1);
 
   //Our player is moving left and right in the bottom of the canvas site.
   this.handleKeyDown = function(event) {
@@ -65,7 +67,6 @@ Game.prototype.start = function() {
 
 // Function to create a bullets
 Game.prototype.bullet = function() {
-  console.log("Bullet");
   var newBullet = new Bullet(
     this.canvas,
     this.player.x + this.player.size / 2,
@@ -79,9 +80,9 @@ Game.prototype.bullet = function() {
 Game.prototype.startLoop = function() {
   var loop = function() {
     // 1. UPDATE THE STATE OF PLAYER
-    
-    //The enemies are going to come in diferent speeds and random depending the 
-    this.levels();
+
+    //The enemies are going to come in diferent speeds and random depending the
+    this.levels(this.player);
 
     // 2. Check if player had hit any enemy (check with enemy) // Check if bullet is collision with enemies
     this.checkCollisions();
@@ -136,8 +137,7 @@ Game.prototype.startLoop = function() {
   window.requestAnimationFrame(loop);
 };
 
-Game.prototype.levels = function() {
-  
+Game.prototype.levels = function(player) {
   var randomX = 0;
   var newEnemy;
   // Is all time in the loop and crash the screen
@@ -146,18 +146,21 @@ Game.prototype.levels = function() {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 2);
       this.enemies.push(newEnemy);
+      player.speed = 5;
     }
-  } else if (this.score < 3000) {
+  } else if (this.score < 1500) {
     if (Math.random() > 0.97) {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 4);
       this.enemies.push(newEnemy);
+      player.speed = 8;
     }
-  }else{
-    if (Math.random() > 0.9) {
+  } else {
+    if (Math.random() > 0.94) {
       var randomX = this.canvas.height * Math.random();
-      var newEnemy = new Enemy(this.canvas, randomX, 10);
+      var newEnemy = new Enemy(this.canvas, randomX, 8);
       this.enemies.push(newEnemy);
+      player.speed = 14;
     }
   }
 };
@@ -181,18 +184,41 @@ Game.prototype.checkCollisionBullet = function() {
   this.bullets.forEach(function(bull) {
     this.enemies.forEach(function(enemy) {
       if (bull.didCollide(enemy)) {
+        
+        // this.ctx.drawImage(this.explosion, Math.floor(enemy.x), enemy.y, enemy.size, enemy.size);
+
+        
+        enemy.imgSrc = this.explosion;
+        
+        
+        
+        console.log("drawwwwwwwwwww", enemy) ;
+
         this.explosionSound.pause();
         this.explosionSound.currentTime = 0;
         this.explosionSound.play();
         this.explosionSound.volume = 0.1;
+
+        // Render the image on the canvas
+
+        // enemy.explosion(200, 200, 40);
+
         // enemy.explosion(enemy.x, enemy.y, enemy.size);
 
+        // setTimeout(this.removeEnemy(enemy, bull), 6000);
+        
+        setTimeout(() => {
+          this.removeEnemy(enemy, bull)
+        }, 250);
+
         // Move the enemy and the bullet off screen to the left
-        enemy.y = this.canvas.height + enemy.size;
-        bull.y = this.canvas.height + enemy.size;
       }
     }, this);
   }, this);
+};
+Game.prototype.removeEnemy = function(enemy, bull) {
+  enemy.y = this.canvas.height + enemy.size;
+  bull.y = this.canvas.height + enemy.size;
 };
 
 Game.prototype.updateGameStats = function() {
