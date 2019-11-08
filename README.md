@@ -122,7 +122,7 @@ Character.prototype.rush(){
     Enemy - updatePosition
     Enemy - insideScreen
     Enermy - OutOfScreen
-    ```
+   ```
 
   ## Links
   
