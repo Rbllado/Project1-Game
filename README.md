@@ -124,7 +124,7 @@ Character.prototype.rush(){
     Enermy - OutOfScreen
     ```
 
-    ## Links
+  ## Links
   
   ### Trello
   
@@ -132,8 +132,6 @@ Character.prototype.rush(){
   
   ###  Git
   URls for the project repo and deploy [Link Repo](https://github.com/Rbllado/Project1-Game) [link Deploy](https://rbllado.github.io/Project1-Game/) 
-  
-  [MIT](https://choosealicense.com/licenses/mit/)
 
   ### Slides
   URls for the project presentation (slides) [Link Slides.com](https://docs.google.com/presentation/d/1RE1qeJk4JLlrR4Z3FKMXwW24MKivENJ31IjLCWa_jRM/edit#slide=id.p)
