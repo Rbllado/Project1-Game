@@ -150,7 +150,7 @@ Game.prototype.levels = function(player) {
       this.enemies.push(newEnemy);
       player.speed = 5;
     }
-  } else if (this.score < 75) {
+  } else if (this.score < 60) {
     if (Math.random() > 0.97) {
       var randomX = this.canvas.height * Math.random();
       var newEnemy = new Enemy(this.canvas, randomX, 4);
